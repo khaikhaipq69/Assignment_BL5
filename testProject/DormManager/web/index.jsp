@@ -6,7 +6,7 @@
         <meta charset="ISO-8859-1">
         <title>Insert title here</title>
         <link rel="stylesheet"
-              href="${pageContext.request.contextPath}/templateLogin/fonts/material-icon/css/material-design-iconic-font.min.css">
+              href="templateLogin/fonts/material-icon/css/material-design-iconic-font.min.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/templateLogin/css/style.css">
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
         <script src='https://kit.fontawesome.com/a076d05399.js' crossorigin='anonymous'></script>
@@ -24,8 +24,8 @@
                     <div class="signin-content">
                         <div class="signin-image">
                             <figure>
-                                <img src="templateLogin/img/signin-image.jpg"
-                                     alt="sign up image">
+                                <img src="templateLogin/images/signin-image.jpg"
+                                     alt="sign in image" />
                             </figure>
                             <a href="register.jsp" class="signup-image-link">Create an account</a>
                         </div>
