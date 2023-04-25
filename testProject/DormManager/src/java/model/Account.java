@@ -2,50 +2,35 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package Model;
 
 public class Account {
-    private int id;
-    private String username;
-    private String password;
-    private String email;
-    private int roleId;
 
-    // Constructors, getters and setters
+    public int accountId;
+    public String email;
+    public String fullname;
+    public String gender;
+    public Long balance;
+    public String rollNumber;
 
     public Account() {
     }
 
-    public Account(int id, String username, String password, String email, int roleId) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
+    public Account(int accountId, String email, String fullname, String gender, Long balance, String rollNumber) {
+        this.accountId = accountId;
         this.email = email;
-        this.roleId = roleId;
+        this.fullname = fullname;
+        this.gender = gender;
+        this.balance = balance;
+        this.rollNumber = rollNumber;
     }
 
-    public int getId() {
-        return id;
+    public int getAccountId() {
+        return accountId;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+    public void setAccountId(int accountId) {
+        this.accountId = accountId;
     }
 
     public String getEmail() {
@@ -56,12 +41,36 @@ public class Account {
         this.email = email;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public String getFullname() {
+        return fullname;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setFullname(String fullname) {
+        this.fullname = fullname;
     }
-    
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public Long getBalance() {
+        return balance;
+    }
+
+    public void setBalance(Long balance) {
+        this.balance = balance;
+    }
+
+    public String getRollNumber() {
+        return rollNumber;
+    }
+
+    public void setRollNumber(String rollNumber) {
+        this.rollNumber = rollNumber;
+    }
+
 }

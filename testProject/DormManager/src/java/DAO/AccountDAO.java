@@ -4,53 +4,48 @@
  */
 package DAO;
 
+import Model.Account;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import model.Account;
 
-public class AccountDAO extends DBContext {
+public class AccountDAO extends DBConnect {
 
-    public Account login(String username, String password) {
-        String sql = "SELECT * FROM Account WHERE Username = ? AND Password = ?";
-        try {
-            PreparedStatement statement = connection.prepareStatement(sql);
-            statement.setString(1, username);
-            statement.setString(2, password);
-            ResultSet rs = statement.executeQuery();
-            if (rs.next()) {
-                int id = rs.getInt("Id");
-                int roleId = rs.getInt("roleId");
-                String email = rs.getString("Email");
-                return new Account(id, username, password, email, roleId);
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    ResultSet rs;
+    PreparedStatement ps;
+
+    public Account login(String email, String pass) throws SQLException {
+        String sql = "SELECT accountId,email,fullname,gender,balance,rollNumber FROM [OCD_DB].[dbo].[Account] where email='" + email + "' and password='" + pass + "'";
+        ps = conn.prepareStatement(sql);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4) == true ? "Male" : "Female", rs.getLong(5), rs.getString(6));
+        }
+        return null;
+    }
+    public Account getAccount(int aid) throws SQLException {
+        String sql = "SELECT accountId,email,fullname,gender,balance,rollNumber FROM [OCD_DB].[dbo].[Account] where accountId=?";
+        ps = conn.prepareStatement(sql);
+        ps.setInt(1, aid);
+        rs = ps.executeQuery();
+        if (rs.next()) {
+            return new Account(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getBoolean(4) == true ? "Male" : "Female", rs.getLong(5), rs.getString(6));
         }
         return null;
     }
 
-    public boolean insertAccount(Account account) {
-        String sql = "INSERT INTO Account(Username, Password, Email, RoleId) VALUES (?, ?, ?, ?)";
-        try ( PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(1, account.getUsername());
-            statement.setString(2, account.getPassword());
-            statement.setString(3, account.getEmail());
-            statement.setInt(4, account.getRoleId());
-            int affectedRows = statement.executeUpdate();
-            if (affectedRows == 0) {
-                return false;
-            }
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+    public boolean register(String email, String password, String fullname, boolean gender) {
+        String sql = "INSERT INTO [dbo].[Account]([email],[password],[fullname],[gender],[balance])\n"
+                + "     VALUES(?,?,?,?,0)";
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, email);
+            ps.setString(2, password);
+            ps.setString(3, fullname);
+            ps.setBoolean(4, gender);
+            return ps.executeUpdate() == 1;
+        } catch (Exception e) {
             return false;
         }
-        return true;
-    }
-    public static void main(String[] args) {
-        AccountDAO dao = new AccountDAO();
-        Account a = dao.login("user1", "123456");
-        System.out.println(a);
     }
 }
