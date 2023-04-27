@@ -24,7 +24,7 @@
                     <div class="signin-content">
                         <div class="signin-image">
                             <figure>
-                                <img src="templateLogin/img/signin-image.jpg"
+                                <img src="templateLogin/images/signin-image.jpg"
                                      alt="sign up image">
                             </figure>
                             <a href="register.jsp" class="signup-image-link">Create an account</a>
